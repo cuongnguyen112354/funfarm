@@ -1,0 +1,100 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="{% static 'styles.css' %}">
+   <!-- <link rel="stylesheet" href="../static/styles.css"> -->
+   <title>Fun Farm</title>
+</head>
+<body>
+   <br>
+   <div class="container">
+      <div class="status">
+         <h2 class="title">Devices & Status</h2>
+         
+         <ul id="device-list">
+            Loading...
+        </ul>
+      </div>
+   
+      <div class="menu">
+         <h2 class="title">Control Menu</h2>
+
+         <div class="sensor-info">
+            <h4>Sensors Data:</h4>
+            <p>Temperature: <span id="temp-value">--</span> °C</p>
+            <p>Humidity: <span id="humidity-value">--</span> %</p>
+            <p>Raining: <span id="rain-status">--</span></p>
+         </div>
+         <div class="device-controls">
+            <h4>Devices Control:</h4>
+            <button id="pump-toggle" onclick="toggleDevice('Pump')">Toggle Pump</button>
+            <button id="servo-toggle" onclick="toggleDevice('Servo')">Toggle Servo</button>
+         </div>
+      </div>
+   </div>
+
+   <script>
+      function updateDeviceStatus() {
+         fetch('/device-status/')
+            .then(response => response.json())
+            .then(data => {
+               const deviceList = document.getElementById('device-list');
+               deviceList.innerHTML = '';
+
+               data.forEach(device => {
+                  const listItem = document.createElement('li');
+                  listItem.className = 'device';
+
+                  const nameElement = document.createElement('h5');
+                  nameElement.textContent = device.name;
+
+                  const statusElement = document.createElement('span');
+                  statusElement.className = 'sub_status ' + (device.status === 'active' ? 'active' : 'inactive');
+                  statusElement.textContent = device.status === 'active' ? 'Active' : 'Inactive';
+
+                  listItem.appendChild(nameElement);
+                  listItem.appendChild(statusElement);
+
+                  deviceList.appendChild(listItem);
+               });
+            })
+            .catch(error => console.error('Lỗi khi tải dữ liệu:', error));
+      }
+
+      function fetchSensorData() {
+      fetch('/get-sensor-data/')
+         .then(response => response.json())
+         .then(data => {
+            document.getElementById('temp-value').textContent = data.temperature;
+            document.getElementById('humidity-value').textContent = data.humidity;
+            document.getElementById('rain-status').textContent = data.is_raining ? 'Yes' : 'No';
+         })
+         .catch(error => console.error('Error fetching sensor data:', error));
+   }
+
+      function toggleDevice(deviceName) {
+         console.log('Device to toggle:', deviceName)
+         fetch('/toggle-device/', {
+            method: 'POST',
+            headers: {
+               'Content-Type': 'application/x-www-form-urlencoded',
+               'X-CSRFToken': '{{ csrf_token }}'
+            },
+            body: 'device=' + deviceName
+         })
+         .then(response => response.json())
+         .catch(error => console.error('Error toggling device:', error));
+      }
+
+      setInterval(updateDeviceStatus, 2000);
+      window.onload = updateDeviceStatus;
+
+      setInterval(fetchSensorData, 2000);
+      window.onload = fetchSensorData;
+   </script>
+</body>
+</html>

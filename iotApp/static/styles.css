@@ -1,0 +1,62 @@
+.container {  
+   display: flex;
+   justify-content: space-around;
+   width: 100%;
+}
+
+.title {
+   text-align: center;
+}
+
+.status .title {
+   margin: 0px;
+   padding: 20px;
+   border-bottom: 2px solid black;
+}
+
+#device-list {  
+   padding-inline-start: 0px;
+   margin: 20px auto;
+}
+
+.status {
+   border: 2px solid black;
+   border-radius: 20px;
+   height: auto;
+   width: 20%;
+}
+
+.device {
+   margin: 20px 0;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   flex-wrap: wrap;
+   padding: 0px 20px;
+}
+
+.device h5 {
+   font-size: 20px;
+   margin: 5px 0;
+}
+
+.sub_status {
+   font-weight: bold;
+   padding: 5px 10px;
+   border-radius: 5px;
+   text-transform: capitalize;
+}
+
+.active {
+   color: white;
+   background-color: green;  /* Màu xanh cho trạng thái Active */
+}
+
+.inactive {
+   color: white;
+   background-color: red;  /* Màu đỏ cho trạng thái Inactive */
+}
+
+.menu {
+   width: 70%;
+}
