@@ -8,6 +8,14 @@
    text-align: center;
 }
 
+.status {
+   padding: 10px;
+   border: 2px solid black;
+   border-radius: 20px;
+   height: auto;
+   width: 20%;
+}
+
 .status .title {
    margin: 0px;
    padding: 20px;
@@ -17,13 +25,6 @@
 #device-list {  
    padding-inline-start: 0px;
    margin: 20px auto;
-}
-
-.status {
-   border: 2px solid black;
-   border-radius: 20px;
-   height: auto;
-   width: 20%;
 }
 
 .device {
@@ -49,12 +50,12 @@
 
 .active {
    color: white;
-   background-color: green;  /* Màu xanh cho trạng thái Active */
+   background-color: green;
 }
 
 .inactive {
    color: white;
-   background-color: red;  /* Màu đỏ cho trạng thái Inactive */
+   background-color: red;
 }
 
 .menu {

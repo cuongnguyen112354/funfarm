@@ -49,12 +49,12 @@
 
 .active {
    color: white;
-   background-color: green;  /* Màu xanh cho trạng thái Active */
+   background-color: green;
 }
 
 .inactive {
    color: white;
-   background-color: red;  /* Màu đỏ cho trạng thái Inactive */
+   background-color: red;
 }
 
 .menu {

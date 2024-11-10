@@ -1,0 +1,59 @@
+{% extends "index.html" %}
+
+{% block content %}
+   <div class="simulate">
+      <h3>Simulation</h3>
+
+      <ul>
+         <li>
+            Temperature | <input type="range" min="0" max="100" value="50" id="temperature">
+         </li>
+         <li>
+            Humidity | <input type="range" min="0" max="100" value="50" id="humidity">
+         </li>
+         <li>
+            Rain | <input type="checkbox" id="rain">
+         </li>
+      </ul>
+
+      <center>
+         <button type="button" onclick="sendData()">Sent</button>
+      </center>
+   </div>
+
+   <script>
+      document.addEventListener("DOMContentLoaded", function () {
+         const temperature = document.getElementById("temperature");
+         const humidity = document.getElementById("humidity");
+         const rainSensor = document.getElementById("rain_sensor");
+         const sent = document.getElementById("sent");
+   
+         // Hàm gửi dữ liệu qua AJAX
+         function sendData(data) {
+            fetch("/update_data/", {
+               method: "POST",
+               headers: {
+                     "Content-Type": "application/json",
+                     "X-CSRFToken": "{{ csrf_token }}",
+               },
+               body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(data => {
+               console.log("Data updated:", data);
+            })
+            .catch(error => console.error("Error:", error));
+         }
+   
+         // Gửi tất cả dữ liệu khi nhấn nút Sent
+         document.querySelector("button[type='button']").addEventListener("click", function () {
+            const data = {
+               temperature: temperature.value,
+               humidity: humidity.value,
+               rain: rain.checked ? 1 : 0,
+            };
+            sendData(data);
+         });
+      });
+   </script>
+{% endblock %}

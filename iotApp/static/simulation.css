@@ -1,0 +1,15 @@
+h3 {
+   text-align: center;
+   border-bottom: 3px solid blue;
+   margin-top: 0px;
+   padding-bottom: 10px;
+}
+
+.simulate {
+   position: fixed;
+   padding: 10px;
+   border: 3px solid blue;
+   border-radius: 20px;
+   right: 10px;
+   bottom: 10px;
+}
