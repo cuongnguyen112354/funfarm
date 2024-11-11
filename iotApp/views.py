@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from .models import Device, TempHumidSensorData, RainSensorData
 from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
 
 # Create your views here.
 def home(request):
@@ -31,9 +33,6 @@ def toggle_device(request):
          device.save()
          return JsonResponse({'status': device.status})
    return JsonResponse({'error': 'Invalid request'}, status=400)
-
-from django.views.decorators.csrf import csrf_exempt
-import json
 
 @csrf_exempt
 def update_data(request):
