@@ -70,8 +70,8 @@ def update_data(request):
    return JsonResponse({"status": "failed"}, status=400)
 
 def get_data(request):
-   pump = Device.objects.filter(name="pump", device_type="CONTROL_SYSTEM").first()
-   servo = Device.objects.filter(name="servo", device_type="CONTROL_SYSTEM").first()
+   pump = Device.objects.filter(name="Pump", device_type="CONTROL_SYSTEM").first()
+   servo = Device.objects.filter(name="Servo", device_type="CONTROL_SYSTEM").first()
 
    data = {
       "pump": 0 if pump.status == 'inactive' else 1,
