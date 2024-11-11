@@ -7,7 +7,7 @@ import json
 # Create your views here.
 def home(request):
    devices = Device.objects.all().values('name', 'status')
-   return render(request, 'simulation.html', { 'devices': devices })
+   return render(request, 'index.html', { 'devices': devices })
 
 def get_device_status(request):
    devices = Device.objects.all().values('name','status')
@@ -68,3 +68,10 @@ def update_data(request):
          return JsonResponse({"status": "failed", "error": "No device found for the specified type."}, status=400)
 
    return JsonResponse({"status": "failed"}, status=400)
+
+def get_data(request):
+   data = {
+      "pump": "on",
+      "servo": "open"
+   }
+   return JsonResponse(data)
