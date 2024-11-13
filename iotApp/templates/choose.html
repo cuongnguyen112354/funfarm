@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Land</title>
+</head>
+<body>
+   <h1>Choose Your Land</h1>
+
+   {% if lands %}
+      <ul>
+         {% for land in lands %}
+            <li onclick="window.location = '/home/{{land.location}}/'">
+               <button>Đất số {{land.location}}</button>
+            </li>
+         {% endfor %}            
+      </ul>
+   {% else %}
+      <Button>+</Button>
+   {% endif %}
+</body>
+</html>

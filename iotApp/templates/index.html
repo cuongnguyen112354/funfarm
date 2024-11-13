@@ -6,8 +6,6 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link rel="stylesheet" href="{% static 'styles.css' %}">
-   <link rel="stylesheet" href="{% static 'simulation.css' %}">
-   <!-- <link rel="stylesheet" href="../static/styles.css"> -->
    <title>Fun Farm</title>
 </head>
 <body>
@@ -36,10 +34,9 @@
             <button id="servo-toggle" onclick="toggleDevice('Servo')">Toggle Servo</button>
          </div>
       </div>
-   </div>
 
-   {% block content %}
-   {% endblock %}
+      <a href="{% url 'logout' %}">Logout</a>
+   </div>
 
    <script>
       function updateDeviceStatus() {
