@@ -1,4 +1,13 @@
 from django.db import models
+from django.contrib.auth.models import User
+
+class Land(models.Model):
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='lands')
+    name = models.CharField(max_length=100)
+    location = models.CharField(max_length=255, blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.name} - Owned by {self.owner.username}"
 
 class Device(models.Model):
     DEVICE_TYPES = [
@@ -7,6 +16,7 @@ class Device(models.Model):
         ('CONTROL_SYSTEM', 'Hệ thống điều khiển')
     ]
 
+    land = models.ForeignKey(Land, on_delete=models.CASCADE, related_name='devices')
     name = models.CharField(max_length=100)
     device_type = models.CharField(max_length=50, choices=DEVICE_TYPES)
     status = models.CharField(max_length=50, default='inactive')

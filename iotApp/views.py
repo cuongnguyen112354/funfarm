@@ -1,12 +1,29 @@
 from django.shortcuts import render
-from .models import Device, TempHumidSensorData, RainSensorData
-from django.http import JsonResponse
+from .models import Land, Device, TempHumidSensorData, RainSensorData
+from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import redirect
+from django.contrib.auth import authenticate, login, logout
 import json
 
-# Create your views here.
+def loginPage(request):
+   if request.method == 'POST':
+      username = request.POST['username']
+      password = request.POST['password']
+      user = authenticate(request ,username=username, password=password)
+      if user is not None:
+         login(request, user)
+         return redirect('home')
+      return HttpResponse('Sai thông tin đăng nhập!')
+   else:
+      return render(request, 'login.html')
+   
+def logoutPage(request):
+   logout(request)
+   return redirect('login')
+
 def home(request):
-   devices = Device.objects.all().values('name', 'status')
+   devices = Device.objects.all()
    return render(request, 'index.html', { 'devices': devices })
 
 def get_device_status(request):
