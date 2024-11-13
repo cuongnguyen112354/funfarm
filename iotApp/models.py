@@ -12,16 +12,6 @@ class Device(models.Model):
     status = models.CharField(max_length=50, default='inactive')
     last_updated = models.DateTimeField(auto_now=True)
 
-    @classmethod
-    def create(cls, device, temperature, humidity):
-        # Giới hạn số lượng dữ liệu cho mỗi thiết bị là 100 dòng
-        if cls.objects.filter(device=device).count() >= 100:
-            # Nếu đã có 100 dòng, xóa dòng cũ nhất
-            cls.objects.filter(device=device).order_by('timestamp').first().delete()
-
-        # Tạo một dòng dữ liệu mới
-        return cls.objects.create(device=device, temperature=temperature, humidity=humidity)
-
     def __str__(self):
         return f"{self.name} - {self.device_type} - {self.status}"
 
@@ -34,6 +24,16 @@ class TempHumidSensorData(models.Model):
     humidity = models.FloatField()
 
     timestamp = models.DateTimeField(auto_now_add=True)
+
+    @classmethod
+    def create(cls, device, temperature, humidity):
+        # Giới hạn số lượng dữ liệu cho mỗi thiết bị là 100 dòng
+        if cls.objects.filter(device=device).count() >= 100:
+            # Nếu đã có 100 dòng, xóa dòng cũ nhất
+            cls.objects.filter(device=device).order_by('timestamp').first().delete()
+
+        # Tạo một dòng dữ liệu mới
+        return cls.objects.create(device=device, temperature=temperature, humidity=humidity)
 
     def __str__(self):
         return f"{self.device.name} - Temperature: {self.temperature}°C, Humidity: {self.humidity}% at {self.timestamp}"
