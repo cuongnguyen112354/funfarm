@@ -69,7 +69,7 @@
                                         <i class="ri-user-3-line"></i>
                                         <span>Account</span>
                                     </a>
-                                    <ul class="dropdown-menu">
+                                    <!-- <ul class="dropdown-menu">
                                         <li>
                                             <a class="dropdown-item" href="register.html">Register</a>
                                         </li>
@@ -79,7 +79,7 @@
                                         <li>
                                             <a class="dropdown-item" href="login.html">Login</a>
                                         </li>
-                                    </ul>
+                                    </ul> -->
                                 </li>
                             </ul>
                             <a href="wishlist.html" class="cr-right-bar-item">
@@ -495,13 +495,13 @@
                         <ul class="sub-menu">
                             <li><a href="about.html">About Us</a></li>
                             <li><a href="contact-us.html">Contact Us</a></li>
-                            <li><a href="cart.html">Cart</a></li>
+                            <!-- <li><a href="cart.html">Cart</a></li>
                             <li><a href="checkout.html">Checkout</a></li>
                             <li><a href="track-order.html">Track Order</a></li>
                             <li><a href="wishlist.html">Wishlist</a></li>
                             <li><a href="faq.html">Faq</a></li>
                             <li><a href="login.html">Login</a></li>
-                            <li><a href="register.html">Register</a></li>
+                            <li><a href="register.html">Register</a></li> -->
                             <li><a href="policy.html">Policy</a></li>
                         </ul>
                     </li>
@@ -569,14 +569,14 @@
                         <div class="form-logo">
                             <img src="assets/img/logo/logo.png" alt="logo">
                         </div>
-                        <form class="cr-content-form">
+                        <form class="cr-content-form" method="POST" action="">
                             <div class="form-group">
                                 <label>Username*</label>
-                                <input type="email" placeholder="Enter Your Email or Username" class="cr-form-control">
+                                <input type="text" name="username" placeholder="Enter Your Email or Username" class="cr-form-control">
                             </div>
                             <div class="form-group">
                                 <label>Password*</label>
-                                <input type="password" placeholder="Enter Your password" class="cr-form-control">
+                                <input type="password" name="password" placeholder="Enter Your password" class="cr-form-control">
                             </div>
                             <div class="remember">
                                 <span class="form-group custom">
@@ -586,7 +586,7 @@
                                 <a class="link" href="#">Forgot Password?</a>
                             </div><br>
                             <div class="login-buttons">
-                                <button type="button" class="cr-button">Login</button>
+                                <button type="submit" class="cr-button">Login</button>
                                 <a href="#" class="link">
                                      Signup?
                                 </a>
