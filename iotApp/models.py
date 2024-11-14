@@ -35,16 +35,6 @@ class TempHumidSensorData(models.Model):
 
     timestamp = models.DateTimeField(auto_now_add=True)
 
-    @classmethod
-    def create(cls, device, temperature, humidity):
-        # Giới hạn số lượng dữ liệu cho mỗi thiết bị là 100 dòng
-        if cls.objects.filter(device=device).count() >= 100:
-            # Nếu đã có 100 dòng, xóa dòng cũ nhất
-            cls.objects.filter(device=device).order_by('timestamp').first().delete()
-
-        # Tạo một dòng dữ liệu mới
-        return cls.objects.create(device=device, temperature=temperature, humidity=humidity)
-
     def __str__(self):
         return f"{self.device.name} - Temperature: {self.temperature}°C, Humidity: {self.humidity}% at {self.timestamp}"
 
@@ -56,16 +46,6 @@ class RainSensorData(models.Model):
     # Trạng thái mưa (True hoặc False)
     is_raining = models.BooleanField()
     timestamp = models.DateTimeField(auto_now_add=True)
-
-    @classmethod
-    def create(cls, device, is_raining):
-        # Giới hạn số lượng dữ liệu cho mỗi thiết bị là 100 dòng
-        if cls.objects.filter(device=device).count() >= 100:
-            # Nếu đã có 100 dòng, xóa dòng cũ nhất
-            cls.objects.filter(device=device).order_by('timestamp').first().delete()
-
-        # Tạo một dòng dữ liệu mới
-        return cls.objects.create(device=device, is_raining=is_raining)
 
     def __str__(self):
         return f"{self.device.name} - Is it raining? {'Yes' if self.is_raining else 'No'} at {self.timestamp}"
